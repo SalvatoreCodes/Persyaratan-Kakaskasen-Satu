@@ -1,0 +1,109 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+:root {
+  --primary: #9a0000;
+  --primary-paragraph: #270000;
+  --secondary: #00d300;
+  --secondary-paragraph: #003500;
+  --paragraph: #bfbfbf;
+}
+
+.back {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+.back button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.back button img {
+  height: 8px;
+  width: 16px;
+}
+.back button:hover {
+  scale: 1.1;
+}
+
+.app {
+  background: rgb(154, 0, 0);
+  background: linear-gradient(180deg, rgb(154, 0, 0) 5%, rgb(255, 255, 255) 75%);
+  height: 100vh;
+  position: relative;
+}
+.app .app--content {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+.app .app--content img {
+  height: 248px;
+}
+.app .app--content button {
+  background: #ff4742;
+  border: 1px solid #ff4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  transition: all 0.25s ease-in-out;
+}
+.app .app--content button a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.app .app--content button:hover,
+.app .app--content button:active {
+  background-color: initial;
+  background-position: 0 0;
+}
+.app .app--content button:hover a,
+.app .app--content button:active a {
+  color: #ff4742;
+}
+.app .app--content button:active {
+  opacity: 0.5;
+}
+
+.persyaratan {
+  background: rgb(154, 0, 0);
+  background: linear-gradient(180deg, rgb(154, 0, 0) 5%, rgb(255, 255, 255) 75%);
+  height: 100vh;
+}
+.persyaratan .persyaratan--content {
+  padding: 64px 16px 0 16px;
+}/*# sourceMappingURL=styles.css.map */
