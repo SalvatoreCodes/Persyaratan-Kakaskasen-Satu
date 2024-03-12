@@ -87,6 +87,7 @@ body {
 }
 .app .app--content h3 {
   font-family: "Kanit", sans-serif;
+  text-align: center;
 }
 .app .app--content button {
   background: #ff4742;
