@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import firebase from "./firebase";
 import Logo from "./images/logo/lambang kota tomohon.png";
 
 function App() {
@@ -8,7 +7,6 @@ function App() {
   const [alamat, setAlamat] = useState("");
   const [tujuan, setTujuan] = useState("");
   const navigate = useNavigate();
-  const db = firebase.firestore();
 
   const handleNamaChange = (event) => {
     setNama(event.target.value);
@@ -32,9 +30,7 @@ function App() {
     };
 
     try {
-      await db.collection("submissions").add(data);
-      console.log("Form submitted successfully!");
-      navigate(`/${tujuan.toLowerCase().replace(/ /g, "_")}`);
+      await navigate(`/${tujuan.toLowerCase().replace(/ /g, "_")}`);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
