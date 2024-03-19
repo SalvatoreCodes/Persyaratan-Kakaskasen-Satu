@@ -1,5 +1,8 @@
+// App.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import firestore from "./firebase"; // Import Firestore instance
+
 import Logo from "./images/logo/lambang kota tomohon.png";
 
 function App() {
@@ -22,17 +25,21 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {
-      nama,
-      alamat,
-      tujuan,
-      submittedDate: new Date().toISOString(),
-    };
 
     try {
-      await navigate(`/${tujuan.toLowerCase().replace(/ /g, "_")}`);
+      // Add form data to Firestore collection
+      await firestore.collection("submissions").add({
+        nama,
+        alamat,
+        tujuan,
+        submittedDate: new Date().toISOString(),
+      });
+
+      // Navigate to the appropriate page
+      navigate(`/${tujuan.toLowerCase().replace(/ /g, "_")}`);
     } catch (error) {
       console.error("Error submitting form:", error);
+      // Handle error
     }
   };
 
