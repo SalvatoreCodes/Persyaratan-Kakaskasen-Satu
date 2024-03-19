@@ -23,23 +23,28 @@ function App() {
     setTujuan(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    try {
-      // Add form data to Firestore collection
-      await firestore.collection("submissions").add({
+  const buttonHandler = async (e) => {
+    e.preventDefault();
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
         nama,
         alamat,
         tujuan,
-        submittedDate: new Date().toISOString(),
-      });
-
-      // Navigate to the appropriate page
+        submittedDate: new Date().toJSON().slice(0, 10),
+      }),
+    };
+    const res = await fetch(
+      "https://pelayanan-kakaskasen-satu-default-rtdb.asia-southeast1.firebasedatabase.app/UserData.json",
+      options
+    );
+    if (res) {
       navigate(`/${tujuan.toLowerCase().replace(/ /g, "_")}`);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      // Handle error
+    } else {
+      navigate("/error-page");
     }
   };
 
@@ -51,12 +56,12 @@ function App() {
           <h3>Proses Pengurusan Surat-menyurat</h3>
         </div>
         <img src={Logo} alt="logo kota tomohon" />
-        <h3>PEMERINTAHAN KOTA TOMOHON</h3>
+        <h4>PEMERINTAHAN KOTA TOMOHON</h4>
         <h5>KELURAHAN KAKASKASEN SATU</h5>
-        <form onSubmit={handleSubmit}>
+        <form method="POST">
           <div>
             <label>
-              Nama:
+              Nama
               <input
                 required
                 type="text"
@@ -67,7 +72,7 @@ function App() {
           </div>
           <div>
             <label>
-              Alamat:
+              Alamat
               <input
                 required
                 type="text"
@@ -78,7 +83,7 @@ function App() {
           </div>
           <div>
             <label>
-              Tujuan:
+              Tujuan
               <select value={tujuan} onChange={handleTujuanChange}>
                 <option value="">-</option>
                 <option value="Kartu Identitas Anak">
@@ -94,7 +99,7 @@ function App() {
               </select>
             </label>
           </div>
-          <button type="submit">Submit</button>
+          <button onClick={buttonHandler}>Submit</button>
         </form>
       </div>
     </div>

@@ -15,6 +15,11 @@ const router = createBrowserRouter([
   },
 
   {
+    path: "/error-page",
+    element: <ErrorPage />,
+  },
+
+  {
     path: "/kartu_identitas_anak",
     element: <KIA />,
   },
