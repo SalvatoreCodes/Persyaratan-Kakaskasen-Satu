@@ -29,6 +29,7 @@ body {
 .container {
   display: grid;
   gap: 8px;
+  margin-bottom: 64px;
 
   .content--header {
     color: white;
@@ -37,11 +38,38 @@ body {
     align-items: center;
     gap: 4px;
     margin-bottom: 12px;
+    font-family: "Kanit", sans-serif;
+    font-size: 14px;
+    margin-bottom: 16px;
+
+    h1 {
+      text-align: center;
+    }
 
     div {
       border: 1px solid white;
       width: 128px;
     }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    li {
+      background-color: var(--paragraph);
+      width: 100%;
+      text-align: justify;
+      padding: 16px 16px;
+      border-radius: 8px;
+      line-height: 24px;
+    }
+  }
+
+  a {
+    width: 100%;
   }
 
   button {
@@ -55,7 +83,7 @@ body {
     cursor: pointer;
     text-align: center;
     width: 100%;
-    margin-bottom: 4px;
+    margin-bottom: 16px;
     transition: 0.05s all ease-in-out;
   }
 

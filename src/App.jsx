@@ -1,7 +1,5 @@
-// App.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import firestore from "./firebase"; // Import Firestore instance
 
 import Logo from "./images/logo/lambang kota tomohon.png";
 
@@ -10,13 +8,31 @@ function App() {
   const [alamat, setAlamat] = useState("");
   const [tujuan, setTujuan] = useState("");
   const navigate = useNavigate();
+  const [predictions, setPredictions] = useState([]);
+
+  useEffect(() => {
+    const input = document.getElementById("autocomplete-input");
+    const autocomplete = new window.google.maps.places.Autocomplete(input);
+    autocomplete.setComponentRestrictions({ country: ["id"] });
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+        return;
+      }
+      setAlamat(place.formatted_address);
+      setPredictions([]);
+    });
+  }, []); // Only run once on component mount
+
+  const handleInputChange = (event) => {
+    setAlamat(event.target.value);
+    if (event.target.value.trim() === "") {
+      setPredictions([]);
+    }
+  };
 
   const handleNamaChange = (event) => {
     setNama(event.target.value);
-  };
-
-  const handleAlamatChange = (event) => {
-    setAlamat(event.target.value);
   };
 
   const handleTujuanChange = (event) => {
@@ -53,7 +69,7 @@ function App() {
       <div className="app--content">
         <div className="app--header">
           <h1>PELAYANAN UMUM</h1>
-          <h3>Proses Pengurusan Surat-menyurat</h3>
+          <h3>Pengurusan Surat</h3>
         </div>
         <img src={Logo} alt="logo kota tomohon" />
         <h4>PEMERINTAHAN KOTA TOMOHON</h4>
@@ -74,11 +90,17 @@ function App() {
             <label>
               Alamat
               <input
-                required
+                id="autocomplete-input"
                 type="text"
+                placeholder="Enter a location"
                 value={alamat}
-                onChange={handleAlamatChange}
+                onChange={handleInputChange}
               />
+              <ul>
+                {predictions.map((prediction) => (
+                  <li key={prediction.id}>{prediction.description}</li>
+                ))}
+              </ul>
             </label>
           </div>
           <div>
