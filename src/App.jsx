@@ -14,6 +14,13 @@ function App() {
     const input = document.getElementById("autocomplete-input");
     const autocomplete = new window.google.maps.places.Autocomplete(input);
     autocomplete.setComponentRestrictions({ country: ["id"] });
+
+    const tomohonBounds = new window.google.maps.LatLngBounds(
+      new window.google.maps.LatLng(1.3014, 124.8421),
+      new window.google.maps.LatLng(1.3352, 124.8685)
+    );
+    autocomplete.setBounds(tomohonBounds);
+
     autocomplete.addListener("place_changed", () => {
       const place = autocomplete.getPlace();
       if (!place.geometry) {
@@ -22,7 +29,7 @@ function App() {
       setAlamat(place.formatted_address);
       setPredictions([]);
     });
-  }, []); // Only run once on component mount
+  }, []);
 
   const handleInputChange = (event) => {
     setAlamat(event.target.value);
