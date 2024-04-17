@@ -29,12 +29,7 @@ function App() {
   const buttonHandler = async (e) => {
     e.preventDefault();
 
-    if (
-      !nama ||
-      !NIK ||
-      (!alamat && alamat === "-") ||
-      (!tujuan && tujuan === "-")
-    ) {
+    if (!nama || !NIK || alamat === "-" || tujuan === "-") {
       alert("Tolong isi semua informasi.");
       return;
     } else if (NIK.length < 16) {
