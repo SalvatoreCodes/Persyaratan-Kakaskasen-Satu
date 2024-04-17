@@ -29,7 +29,12 @@ function App() {
   const buttonHandler = async (e) => {
     e.preventDefault();
 
-    if (!nama || !NIK || !alamat || !tujuan) {
+    if (
+      !nama ||
+      !NIK ||
+      (!alamat && alamat === "-") ||
+      (!tujuan && tujuan === "-")
+    ) {
       alert("Tolong isi semua informasi.");
       return;
     } else if (NIK.length < 16) {
@@ -88,7 +93,7 @@ function App() {
             <label>
               Alamat
               <select value={alamat} onChange={handleAlamatChange}>
-                <option value="">-</option>
+                <option value="-">-</option>
                 <option value="lingkungan 1">lingkungan 1</option>
                 <option value="lingkungan 2">lingkungan 2</option>
                 <option value="lingkungan 3">lingkungan 3</option>
@@ -106,7 +111,7 @@ function App() {
             <label>
               Tujuan
               <select value={tujuan} onChange={handleTujuanChange}>
-                <option value="">-</option>
+                <option value="-">-</option>
                 <option value="Kartu Identitas Anak">
                   Kartu Identitas Anak
                 </option>
