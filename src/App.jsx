@@ -28,6 +28,15 @@ function App() {
 
   const buttonHandler = async (e) => {
     e.preventDefault();
+
+    if (!nama || !NIK || !alamat || !tujuan) {
+      alert("Tolong isi semua informasi.");
+      return;
+    } else if (NIK.length < 16) {
+      alert("Tolong isi NIK yang benar.");
+      return;
+    }
+
     const options = {
       method: "POST",
       headers: {
@@ -66,24 +75,13 @@ function App() {
           <div>
             <label>
               Nama
-              <input
-                required
-                type="text"
-                value={nama}
-                onChange={handleNamaChange}
-              />
+              <input type="text" value={nama} onChange={handleNamaChange} />
             </label>
           </div>
           <div>
             <label>
               NIK
-              <input
-                required
-                type="number"
-                value={NIK}
-                onChange={handleNIKChange}
-                minLength={16}
-              />
+              <input type="number" value={NIK} onChange={handleNIKChange} />
             </label>
           </div>
           <div>
@@ -113,12 +111,12 @@ function App() {
                   Kartu Identitas Anak
                 </option>
                 <option value="Kartu Keluarga">Kartu Keluarga</option>
-                <option value="KTP-EL">KTP-EL</option>
+                <option value="KTP_EL">KTP-EL</option>
                 <option value="SKPWNI">SKPWNI</option>
-                <option value="Akte Kelahiran">Akte Kelahiran</option>
-                <option value="Akte Kematian">Akte Kematian</option>
-                <option value="Akte Perkawinan">Akte Perkawinan</option>
-                <option value="Akte Perceraian">Akte Perceraian</option>
+                <option value="Akte_Kelahiran">Akte Kelahiran</option>
+                <option value="Akte_Kematian">Akte Kematian</option>
+                <option value="Akte_Perkawinan">Akte Perkawinan</option>
+                <option value="Akte_Perceraian">Akte Perceraian</option>
                 <option value="skck">SKCK</option>
                 <option value="sku">SKU</option>
               </select>
