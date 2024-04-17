@@ -7,35 +7,15 @@ function App() {
   const [nama, setNama] = useState("");
   const [alamat, setAlamat] = useState("");
   const [tujuan, setTujuan] = useState("");
+  const [NIK, setNIK] = useState("");
   const navigate = useNavigate();
-  const [predictions, setPredictions] = useState([]);
 
-  useEffect(() => {
-    const input = document.getElementById("autocomplete-input");
-    const autocomplete = new window.google.maps.places.Autocomplete(input);
-    autocomplete.setComponentRestrictions({ country: ["id"] });
-
-    const tomohonBounds = new window.google.maps.LatLngBounds(
-      new window.google.maps.LatLng(1.3014, 124.8421),
-      new window.google.maps.LatLng(1.3352, 124.8685)
-    );
-    autocomplete.setBounds(tomohonBounds);
-
-    autocomplete.addListener("place_changed", () => {
-      const place = autocomplete.getPlace();
-      if (!place.geometry) {
-        return;
-      }
-      setAlamat(place.formatted_address);
-      setPredictions([]);
-    });
-  }, []);
-
-  const handleInputChange = (event) => {
+  const handleAlamatChange = (event) => {
     setAlamat(event.target.value);
-    if (event.target.value.trim() === "") {
-      setPredictions([]);
-    }
+  };
+
+  const handleNIKChange = (event) => {
+    setNIK(event.target.value);
   };
 
   const handleNamaChange = (event) => {
@@ -55,6 +35,7 @@ function App() {
       },
       body: JSON.stringify({
         nama,
+        NIK,
         alamat,
         tujuan,
         submittedDate: new Date().toJSON().slice(0, 10),
@@ -95,19 +76,32 @@ function App() {
           </div>
           <div>
             <label>
-              Alamat
+              NIK
               <input
-                id="autocomplete-input"
-                type="text"
-                placeholder="Enter a location"
-                value={alamat}
-                onChange={handleInputChange}
+                required
+                type="number"
+                value={NIK}
+                onChange={handleNIKChange}
+                minLength={16}
               />
-              <ul>
-                {predictions.map((prediction) => (
-                  <li key={prediction.id}>{prediction.description}</li>
-                ))}
-              </ul>
+            </label>
+          </div>
+          <div>
+            <label>
+              Alamat
+              <select value={alamat} onChange={handleAlamatChange}>
+                <option value="">-</option>
+                <option value="lingkungan 1">lingkungan 1</option>
+                <option value="lingkungan 2">lingkungan 2</option>
+                <option value="lingkungan 3">lingkungan 3</option>
+                <option value="lingkungan 4">lingkungan 4</option>
+                <option value="lingkungan 5">lingkungan 5</option>
+                <option value="lingkungan 6">lingkungan 6</option>
+                <option value="lingkungan 7">lingkungan 7</option>
+                <option value="lingkungan 8">lingkungan 8</option>
+                <option value="lingkungan 9">lingkungan 9</option>
+                <option value="lingkungan 10">lingkungan 10</option>
+              </select>
             </label>
           </div>
           <div>
@@ -125,6 +119,8 @@ function App() {
                 <option value="Akte Kematian">Akte Kematian</option>
                 <option value="Akte Perkawinan">Akte Perkawinan</option>
                 <option value="Akte Perceraian">Akte Perceraian</option>
+                <option value="skck">SKCK</option>
+                <option value="sku">SKU</option>
               </select>
             </label>
           </div>

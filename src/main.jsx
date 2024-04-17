@@ -27,6 +27,8 @@ import HilangRusakAK from "./Routes/Akte Kelahiran/HilangRusak.jsx";
 import AkteKematian from "./Routes/AkteKematian.jsx";
 import AktePerkawinan from "./Routes/AktePerkawinan.jsx";
 import AktePerceraian from "./Routes/AktePerceraian.jsx";
+import SKCK from "./Routes/SKCK.jsx";
+import SKU from "./Routes/SKU.jsx";
 
 const router = createBrowserRouter([
   {
@@ -153,6 +155,16 @@ const router = createBrowserRouter([
   {
     path: "/akte_perceraian",
     element: <AktePerceraian />,
+  },
+
+  {
+    path: "/skck",
+    element: <SKCK />,
+  },
+
+  {
+    path: "/sku",
+    element: <SKU />,
   },
 ]);
 
