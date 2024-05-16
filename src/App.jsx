@@ -32,7 +32,7 @@ function App() {
     if (!nama || !NIK || alamat === "-" || tujuan === "-") {
       alert("Tolong isi semua informasi.");
       return;
-    } else if (NIK.length < 16) {
+    } else if (NIK.length = 16) {
       alert("Tolong isi NIK yang benar.");
       return;
     }
